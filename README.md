@@ -14,11 +14,12 @@ The pictures are cropped to square at first using center alignment. Then resized
 For using the command line tool Java 11 or higher JVM is required. It supports the following parameters:
 * `-dir ../any/valid/directory` that specifies a directory for looking for images. Defaults to the current directory.
 * `-imageSize 200` that specifies the desired profile picture size assuming 200 pixels. Defaults to 150 pixels.
-The command line tool looks for _jpg_, _jpeg_, _gif_ and _png_ files in the specified directory and saves the made profile pictures with a _profile_ filename suffix and _png_ type.
 
-Example execution
+The command line tool looks for any _jpg_, _jpeg_, _gif_ and _png_ files in the specified directory and saves the created profile pictures with a _profile_ filename suffix and _png_ type.
+
+Example execution assuming _Lenna.png_ and _Mona-lisa.jpg_ in the _/some/dir_ directory will create the respective _Lenna_profile.png_ and _Mona-lis_profile.png_ files in the same directory.
 ```
-#> java -jar ProfilePictureMaker-0.0.1-SNAPSHOT.jar -dir /some/dir -imageSize 200
+> java -jar ProfilePictureMaker-0.0.1-SNAPSHOT.jar -dir /some/dir -imageSize 200
 Using parameters:
         directory: /some/dir
         imageSize: 200
