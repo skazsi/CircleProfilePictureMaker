@@ -1,4 +1,3 @@
-module profile.picture.maker
-{
-	requires java.desktop;	
+module profile.picture.maker {
+	requires java.desktop;
 }

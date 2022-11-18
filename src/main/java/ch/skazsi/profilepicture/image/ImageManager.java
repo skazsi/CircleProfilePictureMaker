@@ -9,10 +9,15 @@ import javax.imageio.ImageIO;
 public class ImageManager {
 
 	private ImageProcessor imageProcessor = new ImageProcessor();
+	private int imageSize;
+	
+	public ImageManager(int imageSize) {
+		this.imageSize = imageSize;
+	}
 
 	public byte[] createProfilePictureAsPNG(byte[] inputImage) {
 		BufferedImage inputBufferedImage = getBufferedImage(inputImage);
-		BufferedImage outputBufferedImage = imageProcessor.process(inputBufferedImage);
+		BufferedImage outputBufferedImage = imageProcessor.process(inputBufferedImage, imageSize);
 		return getPNGByteArray(outputBufferedImage);
 	}
 

@@ -14,12 +14,10 @@ import java.awt.image.RGBImageFilter;
 
 class ImageProcessor {
 
-	private int imageSize = 150;
-
-	BufferedImage process(BufferedImage inputImage) {
+	BufferedImage process(BufferedImage inputImage, int imageSize) {
 		BufferedImage bufferedImage = cropImageToSquare(inputImage);
-		bufferedImage = resize(bufferedImage);
-		bufferedImage = cropToCircle(bufferedImage);
+		bufferedImage = resize(bufferedImage, imageSize);
+		bufferedImage = cropToCircle(bufferedImage, imageSize);
 		return decorateImage(bufferedImage);
 	}
 
@@ -33,7 +31,7 @@ class ImageProcessor {
 		return bufferedImage.getSubimage(0, position, bufferedImage.getWidth(), bufferedImage.getWidth());
 	}
 
-	private BufferedImage resize(BufferedImage bufferedImage) {
+	private BufferedImage resize(BufferedImage bufferedImage, int imageSize) {
 		Image image = bufferedImage.getScaledInstance(imageSize, imageSize, Image.SCALE_SMOOTH);
 		BufferedImage resizedBufferedImage = new BufferedImage(imageSize, imageSize, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D graphics = resizedBufferedImage.createGraphics();
@@ -42,7 +40,7 @@ class ImageProcessor {
 		return resizedBufferedImage;
 	}
 
-	private BufferedImage cropToCircle(BufferedImage bufferedImage) {
+	private BufferedImage cropToCircle(BufferedImage bufferedImage, int imageSize) {
 		ImageFilter filter = new RGBImageFilter() {
 
 			private double threshold = Math.pow((imageSize - 1) / 2, 2);
