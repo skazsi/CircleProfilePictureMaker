@@ -7,6 +7,8 @@ import ch.skazsi.profilepicture.repository.ImageRepository;
 
 public class ProfilePictureMaker {
 
+	private static final String PROFILE_PICTURE_SUFFIX = "_profile";
+	
 	public static void main(String[] args) {
 
 		Parameters parameters = new Parameters(args);
@@ -19,10 +21,14 @@ public class ProfilePictureMaker {
 
 		while (imageRepository.hasNext()) {
 			Image image = imageRepository.next();
+			if (image.getName().endsWith(PROFILE_PICTURE_SUFFIX)) {
+				System.out.println("Skipping image of "+image.getName()+"."+image.getType());
+				continue;
+			}
 			System.out.println("Processing image of "+image.getName()+"."+image.getType());
 			
 			byte[] profilePictureAsPNGBytes = imageManager.createProfilePictureAsPNG(image.getBytes());
-			Image profileImage = new Image(image.getName() + "_profile", "png", profilePictureAsPNGBytes);
+			Image profileImage = new Image(image.getName() + PROFILE_PICTURE_SUFFIX, "png", profilePictureAsPNGBytes);
 			imageRepository.save(profileImage);
 		}
 	}
